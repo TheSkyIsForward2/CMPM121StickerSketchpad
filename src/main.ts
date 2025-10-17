@@ -10,8 +10,8 @@ document.body.innerHTML = `
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const clearButton = document.getElementById("clearbutton")!;
-//const undoButton = document.getElementById("undoButton")!;
-//const redoButton = document.getElementById("redoButton")!;
+const undoButton = document.getElementById("undoButton")!;
+const redoButton = document.getElementById("redoButton")!;
 
 const ctx = canvas.getContext("2d");
 if (!ctx) throw new Error("Failed to get canvas context");
@@ -51,7 +51,7 @@ canvas.addEventListener("mousemove", (e) => {
   redraw();
 });
 
-canvas.addEventListener("mouseup", (e) => {
+canvas.addEventListener("mouseup", () => {
   cursor.active = false;
   currentLine = null;
 
@@ -78,7 +78,7 @@ clearButton.addEventListener("click", () => {
   redraw();
 });
 
-/*undoButton.addEventListener("click", () => {
+undoButton.addEventListener("click", () => {
   if (lines.length > 0) {
     redoLines.push(lines.pop()!);
     redraw();
@@ -90,4 +90,4 @@ redoButton.addEventListener("click", () => {
     lines.push(redoLines.pop()!);
     redraw();
   }
-});*/
+});
