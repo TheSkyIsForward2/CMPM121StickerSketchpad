@@ -7,7 +7,7 @@ document.body.innerHTML = `
 
 `;
 
-/*const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const button = document.getElementById("clearbutton")!;
 const ctx = canvas.getContext("2d");
 if (!ctx) throw new Error("Failed to get canvas context");
@@ -35,4 +35,4 @@ canvas.addEventListener("mousemove", (e) => {
 
 canvas.addEventListener("mouseup", () => {
   cursor.active = false;
-});*/
+});
