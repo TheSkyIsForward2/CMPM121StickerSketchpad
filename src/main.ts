@@ -16,11 +16,9 @@ const redoButton = document.getElementById("redoButton")!;
 const ctx = canvas.getContext("2d");
 if (!ctx) throw new Error("Failed to get canvas context");
 
-// ✅ Define types
 type Point = { x: number; y: number };
 type Line = Point[];
 
-// ✅ Define arrays with proper types
 const lines: Line[] = [];
 const redoLines: Line[] = [];
 
