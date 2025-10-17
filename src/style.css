@@ -6,18 +6,18 @@
 
 body {
   margin: 0;
-  height: 100vh;                 /* make body fill screen */
-  display: flex;                 /* enable flexbox */
-  flex-direction: column;        /* stack vertically */
-  align-items: center;           /* center horizontally */
-  justify-content: center;       /* center vertically */
+  height: 100vh; /* make body fill screen */
+  display: flex; /* enable flexbox */
+  flex-direction: column; /* stack vertically */
+  align-items: center; /* center horizontally */
+  justify-content: center; /* center vertically */
   background-color: #f0f0f0;
 }
 
 .canvas {
   border: 2px solid black;
   background-color: white;
-  margin: 10px 0;  
+  margin: 10px 0;
 }
 
 .clearButton {
