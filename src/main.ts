@@ -1,6 +1,6 @@
 import "./style.css";
 
-document.title = "Sticker Sketchpad"
+document.title = "Sticker Sketchpad";
 
 document.body.innerHTML = `
   
