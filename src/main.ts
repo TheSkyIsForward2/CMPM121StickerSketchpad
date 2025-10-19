@@ -1,5 +1,10 @@
 import "./style.css";
+
+document.title = "Sticker Sketchpad"
+
 document.body.innerHTML = `
+  
+  <h1>Sticker Sketchpad</h1>
 
   <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
     <canvas id="canvas" class="canvas" width="256" height="256"></canvas> 
