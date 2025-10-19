@@ -16,13 +16,32 @@ const redoButton = document.getElementById("redoButton")!;
 const ctx = canvas.getContext("2d");
 if (!ctx) throw new Error("Failed to get canvas context");
 
-type Point = { x: number; y: number };
-type Line = Point[];
+class MarkerLine {
+  private points: { x: number; y: number }[] = [];
 
-const lines: Line[] = [];
-const redoLines: Line[] = [];
+  constructor(startX: number, startY: number) {
+    this.points.push({ x: startX, y: startY });
+  }
 
-let currentLine: Line | null = null;
+  drag(x: number, y: number) {
+    this.points.push({ x, y });
+  }
+
+  display(ctx: CanvasRenderingContext2D) {
+    if (this.points.length < 2) return;
+    ctx.beginPath();
+    ctx.moveTo(this.points[0].x, this.points[0].y);
+    for (const p of this.points) {
+      ctx.lineTo(p.x, p.y);
+    }
+    ctx.stroke();
+  }
+}
+
+const lines: MarkerLine[] = [];
+const redoLines: MarkerLine[] = [];
+
+let currentLine: MarkerLine | null = null;
 
 const cursor = { active: false, x: 0, y: 0 };
 
@@ -31,10 +50,9 @@ canvas.addEventListener("mousedown", (e) => {
   cursor.x = e.offsetX;
   cursor.y = e.offsetY;
 
-  currentLine = [];
+  currentLine = new MarkerLine(cursor.x, cursor.y);
   lines.push(currentLine);
   redoLines.splice(0, redoLines.length);
-  currentLine.push({ x: cursor.x, y: cursor.y });
 
   redraw();
 });
@@ -44,7 +62,7 @@ canvas.addEventListener("mousemove", (e) => {
 
   cursor.x = e.offsetX;
   cursor.y = e.offsetY;
-  currentLine.push({ x: cursor.x, y: cursor.y });
+  currentLine.drag(cursor.x, cursor.y);
 
   redraw();
 });
@@ -56,17 +74,12 @@ canvas.addEventListener("mouseup", () => {
   redraw();
 });
 
+// Rendering
 function redraw() {
-  ctx!.clearRect(0, 0, canvas.width, canvas.height);
-  for (const line of lines) {
-    if (line.length > 1) {
-      ctx!.beginPath();
-      const { x, y } = line[0];
-      ctx!.moveTo(x, y);
-      for (const { x, y } of line) {
-        ctx!.lineTo(x, y);
-      }
-      ctx!.stroke();
+  if (ctx != null) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const line of lines) {
+      line.display(ctx);
     }
   }
 }
